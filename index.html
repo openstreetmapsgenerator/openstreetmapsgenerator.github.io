@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Free OpenStreet Maps Generator - OpenStreet Maps API</title>
+    <meta name="description" content="Add a OpenStreet Map location to your site in just a few clicks. Generate code for OpenStreet Maps absolutely free." />
+    <meta name="google-site-verification" content="XmcuLICdS0CQ4bETu6OB64thP05teFiR5TN5ZzuDyOQ" />
+    <meta name="msvalidate.01" content="24F7A516EE8BA1C5B3AAE5422B62908B" />
+    <link rel="icon" href="/favicon144.png" type="image/png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon144.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon96.png">
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Free OpenStreet Maps Code Generator" />
+    <meta property="og:description" content="Free OpenStreet Maps Code Generator. OpenStreet Maps iframe Generator. Embed OpenStreet Maps HTML. OpenStreet Maps for Website with two clicks. Type in your Title & Address, copy the HTML-Code. Paste the Code to your Website."
+    />
+    <meta name="keywords" content="generator,azure,embed,maps" />
+    <meta property="og:url" content="https://openstreetmapsgenerator.github.io/" />
+    <meta property="og:site_name" content="Free OpenStreet Maps Code Generator" />
+    <meta property="og:image" content="https://openstreetmapsgenerator.github.io/free-openstreet-maps-code-generator.png" />
+    <meta property="og:image:secure_url" content="https://openstreetmapsgenerator.github.io/free-openstreet-maps-code-generator.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@freeazuremapscodegenerator" />
+    <meta name="twitter:domain" content="https://openstreetmapsgenerator.github.io/" />
+    <meta name="twitter:title" content="Free OpenStreet Maps Code Generator" />
+    <meta name="twitter:description" content="Free OpenStreet Maps Code Generator. OpenStreet Maps iframe Generator. Embed OpenStreet Maps HTML. OpenStreet Maps for Website with two clicks. Type in your Title & Address, copy the HTML-Code. Paste the Code to your Website."
+    />
+    <meta name="twitter:image" content="https://openstreetmapsgenerator.github.io/free-openstreet-maps-code-generator.png" />
+
+    <link rel="canonical" href="https://openstreetmapsgenerator.github.io/" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <style>
+        #formap {
+            overflow: hidden;
+            transition: all 0.5s;
+            width: 600px;
+            height: 400px;
+            margin: 1rem auto;
+        }
+        
+        @media screen and (max-width:600px) {
+            #formap {
+                max-width: 100%;
+            }
+        }
+        
+        i.material-icons {
+            vertical-align: middle;
+        }
+        
+        form {
+            padding-top: 2rem;
+        }
+        
+        #gmapcode {
+            height: 7em;
+        }
+    </style>
+
+</head>
+
+<body onload="GetMap()">
+    <header class="indigo darken-4 white-text">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1 class="center-align">OpenStreet Maps Code Generator</h1>
+                </div>
+            </div>
+        </div>
+        <nav class="indigo">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <div class="col s12">
+                        <ul class="left">
+                            <li>
+                                <a href="#generator">Generator</a>
+                            </li>
+                            <li>
+                                <a href="#sponsors">Sponsors</a>
+                            </li>
+                            <li>
+                                <a href="#about">About</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <form action="#" id="generator" class="scrollspy">
+                <div class="row card-panel">
+                    <div class="col s11 m8">
+                        <div class="input-field">
+                            <i class="material-icons  prefix">search</i>
+                            <input type="text" name="s" id="s" value="London" placeholder="Enter Adress" data-role="none">
+                            <label for="s">Enter your Address:</label>
+                        </div>
+                    </div>
+                    <div class="col s12 m4">
+                        <div class="input-field center-align">
+                            <button id="h" data-target="modal1" class="btn btn-large  modal-trigger">Get HTML-Code</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row card-panel">
+                    <div class="col s3">
+                        <h6>Circle map </h6>
+                        <div class="input-field">
+                            <div class="switch">
+                                <label>
+                  Off
+                  <input type="checkbox" onclick="setMapStyle(this)" id="ic" name="ic">
+                  <span class="lever"></span>
+                  On
+                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s3">
+                        <h6 class="mapz">Map Zoom </h6>
+                        <div class="input-field">
+                            <p class="range-field">
+                                <input id="zoom" onchange="setMapZoom(this)" type="range" min="1" max="20" step="1" value="13">
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col s3">
+                        <h6>Width (px): </h6>
+                        <p class="range-field">
+                            <input type="range" name="width" id="width" min="240" max="1080" step="10" value="600" placeholder="" class="numeric">
+                        </p>
+                    </div>
+                    <div class="col s3">
+                        <h6>Height (px):</h6>
+                        <p class="range-field">
+                            <input type="range" name="height" id="height" min="240" max="1080" step="10" value="400" placeholder="" class="numeric">
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <div id="myMap" style="position:relative;width:600px;height:400px;margin: 0 auto"></div>
+                <div id="modal1" class="modal">
+                    <div class="modal-content">
+                        <h4>Code</h4>
+                        <p>Copy & Paste this OpenStreetMaps-Code to your Website:</p>
+                        <textarea id="gmapcode" rows="5">
+
+              </textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row scrollspy" id="about">
+                <div class="col s12 card-panel">
+                    <h3>About</h3>
+                    <p>OpenStreet Maps is the most popular online mapping service with interactive zooming and panning, directions, location details, satellite views. You can include a OpenStreet Map on your site that includes a pin dropped at the address
+                        of a location. This is useful for your own business, but can also be used by bloggers, reviewers, and other websites that discuss specific establishments. </p>
+                    <p>
+                        <h2>How do I create a custom OpenStreet Map?</h2>
+                        <p>OpenStreet Maps is a wonderful tool to use when you need to map out a location. However, sometimes you want to customize your map and add additional elements such as text, graphics, and other features. OpenStreet Maps will not
+                            let users customize the map directly unless they create their own code.</p>
+                        <h2>How to generate custom code for OpenStreet Maps</h2>
+                        <p>There are many ways to generate custom code for OpenStreet Maps. One way involves downloading the code from the developer website and then uploading it into your webpage's source code. Another way is through an advanced OpenStreet
+                            Map generator that allows you to customize every aspect of the map through a simple interface.</p>
+                        <h2>What is OpenStreet Maps API?</h2>
+                        <p>The OpenStreet Maps API offers a number of benefits that are not available on other mapping APIs. It has more data points than some other services, more information about street level detail coverage, more accurate calculations
+                            for distance and travel time between two points in the world. This makes it ideal for location based services or applications that require mapping functionality.</p>
+                        <h2>What is OpenStreet Maps?</h2>
+                        <p>OpenStreet Maps is a mapping service that offers directions to users of Android, iOS, BlackBerry OS, Windows Phone, Windows 10 Mobile. OpenStreet Maps has many uses for both personal and business use. It can be used to get directions
+                            from one place to another, look for places on the map or find out what business are around you.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="page-footer grey darken-4 white-text">
+        <div class="container">
+            <div class="row" style="margin-bottom: 0;">
+                <div class="col s12">
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                &copy; 2024 openstreetmapsgenerator.github.io, Developed by <a href="https://ivatech.dev" target="_blank">Iva Tech</a>.
+            </div>
+        </div>
+        </div>
+    </footer>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'></script>
+    <script>
+        var searchURL, datasource, client, searchInput, resultsPanel, searchInputLength, centerMapOnResults, point;
+        var _map = {
+            zoom: 13,
+            center: [51.505, -0.09],
+            style: 'mapnik' //'cyclemap'
+        };
+
+        var minSearchInputLength = 3;
+
+        var keyStrokeDelay = 150;
+        searchInput = document.getElementById("s");
+        searchInput.addEventListener("keyup", searchInputKeyup);
+        var osmap;
+
+        function GetMap() {
+            if (osmap != undefined) {
+                osmap.remove();
+            }
+            osmap = L.map('myMap').setView(_map.center, _map.zoom);
+            let marker = L.marker(_map.center).addTo(osmap);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 20
+            }).addTo(osmap);
+        }
+
+        function searchInputKeyup(e) {
+            centerMapOnResults = true;
+            if (searchInput.value.length >= minSearchInputLength) {
+                if (e.keyCode === 13) {
+                    centerMapOnResults = false;
+                }
+                setTimeout(function() {
+                    if (searchInputLength == searchInput.value.length) {
+                        search();
+                    }
+                }, keyStrokeDelay);
+            }
+            searchInputLength = searchInput.value.length;
+        }
+
+        function search() {
+            var query = document.getElementById("s").value;
+            let url = `https://nominatim.openstreetmap.org/search.php?q=${query}&format=geojson`;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.features.length > 0) {
+                        _map.center = data.features[0].geometry.coordinates.reverse();
+                        //console.info(data);
+                    }
+                    GetMap();
+                });
+        }
+
+        function setMapStyle(elm) {
+            if (elm.checked) {
+                _map.style = 'cyclemap';
+            } else {
+                _map.style = 'mapnik';
+            }
+            GetMap();
+        }
+
+        function setMapZoom(elm) {
+            _map.zoom = elm.value;
+            GetMap();
+        }
+
+        (function($) {
+            $("#width,#height").on("change", function() {
+                let width = $('#width').val();
+
+                if (window.innerWidth < width) {
+                    width = window.innerWidth - 21;
+                }
+
+                $("#myMap").css({
+                    'width': width + 'px',
+                    'height': $('#height').val() + 'px'
+                });
+                $(".mapboxgl-canvas").css({
+                    'width': width + 'px',
+                    'height': $('#height').val() + 'px'
+                });
+            })
+
+            $('select').formSelect();
+            $('.modal').modal();
+            $('.scrollspy').scrollSpy();
+
+            $('#h').click((e) => {
+                e.preventDefault();
+                search();
+                var zoom = $('#zoom').val();
+                var height = $('#height').val() + 'px'
+                var width = $('#width').val() + 'px'
+                var coordinates = _map.center;
+                //https://www.openstreetmap.org/export/embed.html?bbox=${latLng[0]},${latLng[1]},${latLng[2]},${latLng[3]}&layer=$mapType&marker=${marker[0]},${marker[1]}
+                var html = `<iframe width="${width}" height="${height}" src="https://www.openstreetmap.org/export/embed.html?bbox=${coordinates[1] - 0.01},${coordinates[0] - 0.01},${coordinates[1] + 0.01},${coordinates[0] + 0.01}&layer=${_map.style}&marker=${coordinates[0]},${coordinates[1]}" style="border: none"></iframe>`;
+                $('#gmapcode').text(html);
+
+            })
+
+        })(jQuery)
+    </script>
+</body>
+
+</html>
