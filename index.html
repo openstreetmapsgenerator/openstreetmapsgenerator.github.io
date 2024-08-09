@@ -307,8 +307,9 @@
                 var height = $('#height').val() + 'px'
                 var width = $('#width').val() + 'px'
                 var coordinates = _map.center;
+                var zoom = _map.zoom * 0.005;
                 //https://www.openstreetmap.org/export/embed.html?bbox=${latLng[0]},${latLng[1]},${latLng[2]},${latLng[3]}&layer=$mapType&marker=${marker[0]},${marker[1]}
-                var html = `<iframe width="${width}" height="${height}" src="https://www.openstreetmap.org/export/embed.html?bbox=${coordinates[1] - 0.01},${coordinates[0] - 0.01},${coordinates[1] + 0.01},${coordinates[0] + 0.01}&layer=${_map.style}&marker=${coordinates[0]},${coordinates[1]}" style="border: none"></iframe>`;
+                var html = `<iframe width="${width}" height="${height}" src="https://www.openstreetmap.org/export/embed.html?bbox=${coordinates[1] - zoom},${coordinates[0] - zoom},${coordinates[1] + zoom},${coordinates[0] + zoom}&layer=${_map.style}&marker=${coordinates[0]},${coordinates[1]}" style="border: none"></iframe>`;
                 $('#gmapcode').text(html);
 
             })
